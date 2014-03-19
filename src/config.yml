@@ -1,0 +1,8 @@
+#Конфиг плагина IMSROnliner
+#Подключение к MySQL
+
+MySQL:
+	Host: localhost
+	Login: test
+	Password: test
+	Database: IMSROnliner

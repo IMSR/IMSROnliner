@@ -15,7 +15,7 @@ public class IMSROnliner extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		getLogger().info("IMSROnliner v" + getDescription().getVersion() + " is Enabled");
-		
+		Config.load(this);
 		db = new Maps();
 		
 		getServer().getPluginManager().registerEvents(new OnOff(db), this);
@@ -24,7 +24,7 @@ public class IMSROnliner extends JavaPlugin {
 	
 	@Override
 	public void onDisable() {
-		((IMSROnlinerCommand) cmdex).backupMySQL();
+		new Utils().backupMySQL();
 		getLogger().info("IMSROnliner v" + getDescription().getVersion() + " is Disabled");
 	}
 	

@@ -1,5 +1,7 @@
 package imsr.Istom1n.Commands;
 
+import imsr.Istom1n.Utils;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,16 +18,12 @@ public class IMSROnlinerCommand implements CommandExecutor {
 					return true;
 				}
 				
-				backupMySQL();
+				new Utils().backupMySQL();
 				sender.sendMessage(ChatColor.GREEN + "[IMSROnliner]: Загрузка выполнена успешно!");
 				return true;
 			}
 		}
 		return false;
-	}
-	
-	public void backupMySQL() {
-		//TODO Загрузка в MySQL из Maps
 	}
 
 }
