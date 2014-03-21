@@ -2,7 +2,7 @@
 #Подключение к MySQL
 
 MySQL:
-	Host: localhost
-	Login: test
-	Password: test
-	Database: IMSROnliner
+    Host: localhost
+    Login: root
+    Password: 
+    Database: IMSROnliner

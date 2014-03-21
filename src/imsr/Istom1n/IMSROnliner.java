@@ -1,31 +1,36 @@
 package imsr.Istom1n;
 
 import imsr.Istom1n.Commands.IMSROnlinerCommand;
-import imsr.Istom1n.DB.Maps;
+import imsr.Istom1n.DB.MySQL;
 import imsr.Istom1n.Listeners.OnOff;
 
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class IMSROnliner extends JavaPlugin {
 	
-	private Maps db;
-	private CommandExecutor cmdex = new IMSROnlinerCommand();
+	private static MySQL mysql;
 	
 	@Override
 	public void onEnable() {
-		getLogger().info("IMSROnliner v" + getDescription().getVersion() + " is Enabled");
 		Config.load(this);
-		db = new Maps();
+
+		mysql = new MySQL(Config.login, Config.password, Config.host, Config.database);
+		mysql.createNeeded();
 		
-		getServer().getPluginManager().registerEvents(new OnOff(db), this);
-		getCommand("imsronliner").setExecutor(cmdex);
+		getServer().getPluginManager().registerEvents(new OnOff(), this);
+		getCommand("imsronliner").setExecutor(new IMSROnlinerCommand());
+		
+		getLogger().info("IMSROnliner v" + getDescription().getVersion() + " is Enabled");
 	}
 	
 	@Override
 	public void onDisable() {
-		new Utils().backupMySQL();
+		mysql.backupMySQL();
 		getLogger().info("IMSROnliner v" + getDescription().getVersion() + " is Disabled");
+	}
+	
+	public static MySQL getMySQL() {
+		return mysql;
 	}
 	
 }

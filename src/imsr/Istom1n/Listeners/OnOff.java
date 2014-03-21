@@ -10,23 +10,15 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class OnOff implements Listener {
 	
-	private Maps db;
-	
-	public OnOff(Maps db) {
-		this.db = db;
-	}
-	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
-		db.getTimeOnLogin().put(event.getPlayer().getName(), new Date().getTime());
+		Maps.getTimeOnLogin().put(event.getPlayer().getName(), new Date().getTime());
 	}
 	
 	@EventHandler
 	public void onQuit(PlayerQuitEvent event) {
-		long timeInGame = (new Date().getTime()) - db.getTimeOnLogin().get(event.getPlayer().getName());
-		db.getTimeInGame().put(event.getPlayer().getName(), timeInGame);
-	}
-	
-	
+		long timeInGame = (new Date().getTime()) - Maps.getTimeOnLogin().get(event.getPlayer().getName());
+		Maps.getTimeInGame().put(event.getPlayer().getName(), timeInGame);
+	}	
 
 }

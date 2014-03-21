@@ -1,6 +1,7 @@
 package imsr.Istom1n.Commands;
 
-import imsr.Istom1n.Utils;
+import imsr.Istom1n.IMSROnliner;
+import imsr.Istom1n.DB.MySQL;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -9,6 +10,8 @@ import org.bukkit.command.CommandSender;
 
 public class IMSROnlinerCommand implements CommandExecutor {
 
+	private static MySQL mysql = IMSROnliner.getMySQL();
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String args[]) {
 		if (cmd.getName().equalsIgnoreCase("imsronliner")) {
@@ -18,7 +21,7 @@ public class IMSROnlinerCommand implements CommandExecutor {
 					return true;
 				}
 				
-				new Utils().backupMySQL();
+				mysql.backupMySQL();
 				sender.sendMessage(ChatColor.GREEN + "[IMSROnliner]: Загрузка выполнена успешно!");
 				return true;
 			}

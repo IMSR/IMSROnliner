@@ -6,10 +6,10 @@ import org.bukkit.plugin.Plugin;
 
 public class Config {
 	
-	public static String login = "";
+	public static String login = "root";
 	public static String password = "";
-	public static String host = "";
-	public static String database = "";
+	public static String host = "localhost";
+	public static String database = "IMSROnliner";
 
 	public static void load(IMSROnliner plugin) {
 		loadConfig(plugin);
