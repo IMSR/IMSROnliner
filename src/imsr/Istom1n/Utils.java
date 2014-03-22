@@ -1,9 +1,12 @@
 package imsr.Istom1n;
 
 public class Utils {
-
-	public void backupMySQL() {
-		//TODO Загрузка в MySQL из Maps
+	
+	public int longToInt(long lg) {
+		return (int) (lg/6000);
 	}
 	
+	public long intToLong(int i) {
+		return (long) (i*6000);
+	}
 }

@@ -12,6 +12,7 @@ public class IMSROnliner extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
+		saveDefaultConfig();
 		Config.load(this);
 
 		mysql = new MySQL(Config.login, Config.password, Config.host, Config.database);

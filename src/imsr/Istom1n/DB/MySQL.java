@@ -1,14 +1,10 @@
 package imsr.Istom1n.DB;
 
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
 
 public class MySQL {
 
@@ -26,17 +22,16 @@ public class MySQL {
 	public void createNeeded() {
 		Connection connection = null;
 		try {
-			connection = (Connection) DriverManager.getConnection(host, login, password);
+			connection = (Connection) DriverManager.getConnection("jdbc:mysql://" + host + "/" + database, login, password);
 			log.info("[IMSROnliner] Connected to mysql server, creating database if not exists");
 			Statement st = (Statement) connection.createStatement();
 			
-			st.executeUpdate("CREATE DATABASE IF NOT EXISTS "
-						+ database);
+			st.executeUpdate("CREATE DATABASE IF NOT EXISTS IMSROnliner");
 				
 			st.executeUpdate("CREATE TABLE IF NOT EXISTS IMSROnliner"
 					+ "("
-					+ "keyint int unsigned not null auto_increment primary key,"
-					+ "playername varchar(255)," + "timeInGame int," + ");");
+					+ "id int unsigned not null auto_increment primary key,"
+					+ "playername varchar(255)," + "timeInGame int" + ");");
 			
 			st.close();
 			log.info("[IMSROnliner] Connected to mysql server and database");
@@ -50,12 +45,12 @@ public class MySQL {
 	public void backupMySQL() {
 		Connection connection = null;
 		try {
-			connection = (Connection) DriverManager.getConnection(host, login, password);
+			connection = (Connection) DriverManager.getConnection("jdbc:mysql://" + host + "/" + database, login, password);
 			Statement st = (Statement) connection.createStatement();
 			
-			for (Entry<String, Long> time : Maps.getTimeInGame().entrySet()) {
-				//Добавление пользователя не присутствующего в таблице
-				st.executeUpdate("UPDATE IMSROnliner SET time = " + time.getValue() + " WHERE playername = " + time.getKey() + ";"); 
+			for (Entry<String, Integer> time : Maps.getTimeInGame().entrySet()) {
+				//TODO Добавление пользователя не присутствующего в таблице
+				st.executeUpdate("INSERT INTO IMSROnliner (playername, timeInGame) VALUES('" + time.getKey() + "', " + time.getValue() + ");"); 
 			}
 			
 			st.close();

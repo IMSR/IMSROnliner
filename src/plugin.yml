@@ -1,7 +1,8 @@
 name: IMSROnliner
 main: imsr.Istom1n.IMSROnliner
+author: Istom1n
 version: 1.0
 commands:
-   IMSROnliner:
+   imsronliner:
       description: This is a IMSROnliner backup to MySQL command.
       usage: /IMSROnliner backup

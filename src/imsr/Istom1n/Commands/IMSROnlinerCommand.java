@@ -13,19 +13,18 @@ public class IMSROnlinerCommand implements CommandExecutor {
 	private static MySQL mysql = IMSROnliner.getMySQL();
 	
 	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String args[]) {
-		if (cmd.getName().equalsIgnoreCase("imsronliner")) {
-			if (args[0] == "backup") {
-				if (!sender.hasPermission("imsronliner.backup") && !sender.isOp()) {
-					sender.sendMessage(ChatColor.RED + "Ошибка: вы не имеете прав.");
-					return true;
-				}
-				
-				mysql.backupMySQL();
-				sender.sendMessage(ChatColor.GREEN + "[IMSROnliner]: Загрузка выполнена успешно!");
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		if (args[0].equalsIgnoreCase("backup")) {
+			if (!sender.hasPermission("imsronliner.backup") && !sender.isOp()) {
+				sender.sendMessage(ChatColor.RED + "Ошибка: вы не имеете прав.");
 				return true;
 			}
+			
+			mysql.backupMySQL();
+			sender.sendMessage(ChatColor.GREEN + "[IMSROnliner]: Загрузка выполнена успешно!");
+			return true;
 		}
+		
 		return false;
 	}
 

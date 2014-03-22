@@ -21,7 +21,6 @@ public class Config {
 			Config.password = plugin.getConfig().getString("MySQL.Password");
 			Config.host = plugin.getConfig().getString("MySQL.Host");
 			Config.database = plugin.getConfig().getString("MySQL.Database");
-
 		} catch (Exception e) {
 			plugin.getLogger().log(Level.WARNING, "Ошибка загрузки конфига, используются стандартные значения.");
 		}
